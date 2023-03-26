@@ -3,11 +3,21 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-        
         <link rel="stylesheet" href="style.css">
+        <script type="text/javascript" src="apiGateway-js-sdk/lib/axios/dist/axios.standalone.js"></script>
+        <script type="text/javascript" src="apiGateway-js-sdk/lib/CryptoJS/rollups/hmac-sha256.js"></script>
+        <script type="text/javascript" src="apiGateway-js-sdk/lib/CryptoJS/rollups/sha256.js"></script>
+        <script type="text/javascript" src="apiGateway-js-sdk/lib/CryptoJS/components/hmac.js"></script>
+        <script type="text/javascript" src="apiGateway-js-sdk/lib/CryptoJS/components/enc-base64.js"></script>
+        <script type="text/javascript" src="apiGateway-js-sdk/lib/url-template/url-template.js"></script>
+        <script type="text/javascript" src="apiGateway-js-sdk/lib/apiGatewayCore/sigV4Client.js"></script>
+        <script type="text/javascript" src="apiGateway-js-sdk/lib/apiGatewayCore/apiGatewayClient.js"></script>
+        <script type="text/javascript" src="apiGateway-js-sdk/lib/apiGatewayCore/simpleHttpClient.js"></script>
+        <script type="text/javascript" src="apiGateway-js-sdk/lib/apiGatewayCore/utils.js"></script>
+        <script type="text/javascript" src="apiGateway-js-sdk/apigClient.js"></script>
+        <script type="text/javascript" src="index.js"></script>
     </head>
-    <center>
-
+    <div style="text-align: center">
       <div class ="title">
             Photo Search
       </div>
@@ -20,8 +30,7 @@
       </div>
 
       <div class="buttons">
-          <input type="file" hidden="hidden"/>
-          <button  class="button" type="button">Search Photos</button>
+          <button  class="button" type="button" onclick="search()">Search Photos</button>
       </div>
          
          
@@ -29,9 +38,12 @@
          Upload Photo and custom label
       </div>
       <div class="buttons">
-           <button  class="button" type="button">Upload Photos</button>
+           <button  class="button" type="button" onclick="upload()">Upload Photos</button>
       </div>
-      <input type="text" id="label" class="label" title="Label" placeholder="Upload label">
+      <div>
+        <input type="text" id="label" class="label" title="Label" placeholder="Upload label">
+      </div>
+      <br>
       <div class="container" id="images"></div>
-    </center>
+    </div>
 </div>
