@@ -1,7 +1,3 @@
-// import { APIGatewayClient, CreateApiKeyCommand } from "@aws-sdk/client-api-gateway";
-// var apigClientFactory = require('aws-api-gateway-client').default;
-// import apigClientFactory from APIGatewayClient;
-
 function search() {
   var searchTerm = document.getElementById("searchbar").value;
   console.log(searchTerm)
@@ -40,4 +36,10 @@ function showImages(data) {
   }
   console.log(complete)
   imagesDiv.innerHTML += complete
+}
+
+function upload() {
+  let image = document.getElementById("image").value;
+	let labels = document.getElementById("labels").value;
+
 }

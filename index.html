@@ -18,32 +18,44 @@
         <script type="text/javascript" src="index.js"></script>
     </head>
     <div style="text-align: center">
-      <div class ="title">
+        <div class ="title">
             Photo Search
-      </div>
-      <div class="bar">
-          <input style="display:inline-block;" id="searchbar" class="searchbar" type="text" title="Search" placeholder="Show xxx and OOO">
-          <span>
-             <a style="display:inline-block;" href="#"> 
-             <img class="microphone" style="display:inline;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Google_mic.svg/716px-Google_mic.svg.png" title="Voice Search">
-             </a></span>
-      </div>
+        </div>
+        <div class="bar">
+            <input style="display:inline-block;" id="searchbar" class="searchbar" type="text" title="Search" placeholder="show me LABEL1(and LABEL2)">
+            <span>
+                <a style="display:inline-block;" href="#"> 
+                    <img class="microphone" style="display:inline;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Google_mic.svg/716px-Google_mic.svg.png" title="Voice Search">
+                </a>
+            </span>
+        </div>
 
-      <div class="buttons">
-          <button  class="button" type="button" onclick="search()">Search Photos</button>
-      </div>
+        <div class="buttons">
+            <button  class="button" type="button" onclick="search()">Search Photos</button>
+        </div>
          
          
-      <div class="title">
-         Upload Photo and custom label
-      </div>
-      <div class="buttons">
-           <button  class="button" type="button" onclick="upload()">Upload Photos</button>
-      </div>
-      <div>
-        <input type="text" id="label" class="label" title="Label" placeholder="Upload label">
-      </div>
-      <br>
-      <div class="container" id="images"></div>
+        <div class="title">
+            Upload Photo and custom label
+        </div>
+        <div class="buttons">
+            <div>
+                <label for="file-upload">
+                    Select Image:
+                </label>
+                <input type="file" accept="image/*" id="image" name="filename">
+            </div>
+            <div>
+                <label for="labels">
+                    Custom label(s) (optional):
+                </label>
+                <input type="text" id="labels" class="label" title="Label" placeholder="labels separated by comma">
+            </div>
+            <div>
+                <button  class="button" type="button" onclick="upload()">Upload Photos</button>
+            </div>
+        </div>
+        <br>
+        <div class="container" id="images"></div>
     </div>
 </div>
