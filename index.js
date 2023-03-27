@@ -41,5 +41,25 @@ function showImages(data) {
 function upload() {
   let image = document.getElementById("image").value;
 	let labels = document.getElementById("labels").value;
+  let imageType = image.slice(image.lastIndexOf(".") + 1);
+  let imageNameWithExtension = image.split('\\').pop();
+  let imageName = imageNameWithExtension.slice(0, imageNameWithExtension.lastIndexOf('.'));
+  console.log(imageName)
+  // console.log(image.split('\\').pop())
+  // console.log(image.slice(image.lastIndexOf(".") + 1))
+
+  let config = {
+    headers:{
+      "Content-Type": imageType, 
+      "x-api-key": "bDIGszy43q1tj2xYi0WTZ5lEq6s5SdbY7DhKDAC0", 
+      "x-amz-meta-customLabels": labels
+    }
+  };
+  console.log(config)
+
+  // url = 'https://e1371dfvrl.execute-api.us-east-1.amazonaws.com/coms6998-photos-bucket' + imageName
+  // axios.put(url,imageNameWithExtension,config).then(response=>{
+  //   window.alert("Successfully Upload!");
+  // })
 
 }
