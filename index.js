@@ -1,4 +1,5 @@
 var apigClient = apigClientFactory.newClient({ apiKey: "bDIGszy43q1tj2xYi0WTZ5lEq6s5SdbY7DhKDAC0" });
+
 function search() {
   var searchTerm = document.getElementById("searchbar").value;
   console.log(searchTerm)
@@ -8,7 +9,7 @@ function search() {
     "q": searchTerm
   };
 
-  apigClient.searchGet(params, {}, {headers: {"Access-Control-Allow-Origin": "*"}})
+  apigClient.searchGet(params, {}, {})
     .then(function (result) {
       showImages(result.data);
     }).catch(function (result) {
@@ -46,43 +47,31 @@ function upload() {
   let imageType = image.slice(image.lastIndexOf(".") + 1);
   let imageNameWithExtension = image.split('\\').pop();
   let imageName = imageNameWithExtension.slice(0, imageNameWithExtension.lastIndexOf('.'));
-  // console.log(imageName)
+  // console.log(image)
   // console.log(image.split('\\').pop())
   // console.log(image.slice(image.lastIndexOf(".") + 1))
 
   const file = image_src.files[0];
   const reader = new FileReader();
+  
+  reader.onload = function (e) {
+    let binary_val = e.target.result;
+    let params = {
+      "filename": imageNameWithExtension,
+      "x-amz-meta-customLabels": labels,
+      "Content-Type": "text/base64"
+    }
 
-  reader.addEventListener('load', function() {
-      var body = reader.result;
-      
-      
-      // Do something with the binary data
-      console.log(binary)
-      let config = {
-        headers:{
-          "Content-Type": "application/json", 
-          "x-api-key": "bDIGszy43q1tj2xYi0WTZ5lEq6s5SdbY7DhKDAC0", 
-          "x-amz-meta-customLabels": labels,
-          "Access-Control-Allow-Origin": "*"
-        }
-      };
-      apigClient.invokeApi({}, {}, "PUT", config, body)
+    apigClient.uploadPut(params, btoa(binary_val), {})
       .then(function(result){
           //This is where you would put a success callback
           console.log(result);
-      }).catch( function(result){
+          alert('Image uploaded successfully!')
+      }).catch(function(result){
           //This is where you would put an error callback
+          console.log(result)
       });
-      
-    
-      // url = 'https://e1371dfvrl.execute-api.us-east-1.amazonaws.com/test-stage/upload/coms6998-photos-bucket/' + imageNameWithExtension
-      // axios.put(url,binary,config).then(response=>{
-      //   window.alert("Successfully Upload!");
-      // })
-  });
-  
+  }; 
 
-  
-  // reader.readAsBinaryString(file);
+  reader.readAsBinaryString(file);
 }
