@@ -2,9 +2,7 @@ var apigClient = apigClientFactory.newClient({ apiKey: "bDIGszy43q1tj2xYi0WTZ5lE
 
 function search() {
   var searchTerm = document.getElementById("searchbar").value;
-  console.log(searchTerm)
   
-
   var params = {
     "q": searchTerm
   };
@@ -36,7 +34,7 @@ function showImages(data) {
     complete += row
     complete += "</div>"
   }
-  console.log(complete)
+
   imagesDiv.innerHTML += complete
 }
 
@@ -44,12 +42,7 @@ function upload() {
   let image_src = document.getElementById("image");
   let image = image_src.value;
 	let labels = document.getElementById("labels").value;
-  let imageType = image.slice(image.lastIndexOf(".") + 1);
-  let imageNameWithExtension = image.split('\\').pop();
-  let imageName = imageNameWithExtension.slice(0, imageNameWithExtension.lastIndexOf('.'));
-  // console.log(image)
-  // console.log(image.split('\\').pop())
-  // console.log(image.slice(image.lastIndexOf(".") + 1))
+  let imageName = image.split('\\').pop();
 
   const file = image_src.files[0];
   const reader = new FileReader();
@@ -57,7 +50,7 @@ function upload() {
   reader.onload = function (e) {
     let binary_val = e.target.result;
     let params = {
-      "filename": imageNameWithExtension,
+      "filename": imageName,
       "x-amz-meta-customLabels": labels,
       "Content-Type": "text/base64"
     }
@@ -78,14 +71,23 @@ function upload() {
 
 function searchByVoice(){
   var SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
-  const recognition = new SpeechRecognition();
-  recognition.lang = "en-US";
-  recognition.start();
-  recognition.onresult = (event) => {
-    console.log(event)
-    const speechToText = event.results[0][0].transcript;
-    console.log(speechToText);
-    document.getElementById("searchbar").value = speechToText;
-    search();
+  var status = document.getElementById("status")
+
+  if (SpeechRecognition != undefined) {
+    var recognition = new SpeechRecognition();
+    recognition.lang = "en-US";
+    recognition.start();
+
+    recognition.onstart = () => {
+      status.innerHTML = "Start listening..."
+    }
+
+    recognition.onresult = (event) => {
+      status.innerHTML = ""
+      var speechToText = event.results[0][0].transcript;
+      document.getElementById("searchbar").value = speechToText;
+    }
+  } else {
+    alert("Voice accessibility is not supported on your browser")
   }
 }
