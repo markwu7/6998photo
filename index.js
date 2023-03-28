@@ -75,3 +75,17 @@ function upload() {
 
   reader.readAsBinaryString(file);
 }
+
+function searchByVoice(){
+  var SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+  const recognition = new SpeechRecognition();
+  recognition.lang = "en-US";
+  recognition.start();
+  recognition.onresult = (event) => {
+    console.log(event)
+    const speechToText = event.results[0][0].transcript;
+    console.log(speechToText);
+    document.getElementById("searchbar").value = speechToText;
+    search();
+  }
+}
