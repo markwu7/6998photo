@@ -22,8 +22,8 @@ function showImages(data) {
   var complete = ""
   var row = "<div class=\"row\">"
   for (let i = 0; i < urls.length; i++) {
-    row += `<img src=${urls[i]} height="500">`
-    if (i % 5 == 0) {
+    row += `<img src=${urls[i]} height="500" style="margin-right=10px">`
+    if ((i + 1) % 3 == 0) {
       row += "</div>"
       complete += row
       row = "<div class=\"row\">"
@@ -35,7 +35,7 @@ function showImages(data) {
     complete += "</div>"
   }
 
-  imagesDiv.innerHTML += complete
+  imagesDiv.innerHTML = complete
 }
 
 function upload() {
