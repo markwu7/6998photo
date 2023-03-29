@@ -13,12 +13,12 @@ function search() {
   apigClient.searchGet(params, {}, {})
     .then(function (result) {
       showImages(result.data);
+      status.innerHTML = "";
     }).catch(function (result) {
       alert("Error retrieving response, please try again later")
+      status.innerHTML = "";
       console.log(result);
     });
-
-  status.innerHTML = "";
 }
 
 function showImages(data) {
